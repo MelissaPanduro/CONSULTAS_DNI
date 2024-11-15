@@ -1,9 +1,9 @@
-package pe.edu.vallegrande.rest;
+package pe.edu.vallegrande.product.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.vallegrande.model.ProductoModel;
-import pe.edu.vallegrande.service.ProductoService;
+import pe.edu.vallegrande.product.model.ProductoModel;
+import pe.edu.vallegrande.product.service.ProductoService;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
@@ -24,12 +24,6 @@ public class ProductoRest {
     @GetMapping("/{id}")
     public Mono<ProductoModel> getProductoById(@PathVariable Long id) {
         return productoService.getProductoById(id);
-    }
-
-    // Obtener productos por nombre
-    @GetMapping("/nombre/{nombres}")
-    public Flux<ProductoModel> getProductosByNombres(@PathVariable String nombres) {
-        return productoService.getProductosByNombres(nombres);
     }
 
     // Crear un nuevo producto
