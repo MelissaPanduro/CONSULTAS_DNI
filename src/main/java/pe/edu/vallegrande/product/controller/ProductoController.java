@@ -1,45 +1,48 @@
-package pe.edu.vallegrande.product.rest;
+package pe.edu.vallegrande.product.controller;
 
-import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.vallegrande.product.model.ProductoModel;
 import pe.edu.vallegrande.product.service.ProductoService;
-import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/productos")
-@RequiredArgsConstructor
-public class ProductoRest {
+@RequestMapping("/api/productos")
+public class ProductoController {
 
-    private final ProductoService productoService;
+    @Autowired
+    private ProductoService productoService;
 
-    // Obtener todos los productos
+    @Operation(summary = "Obtener todos los productos")
     @GetMapping
     public Flux<ProductoModel> getAllProductos() {
         return productoService.getAllProductos();
     }
 
-    // Obtener producto por ID
+    @Operation(summary = "Obtener un producto por ID")
     @GetMapping("/{id}")
     public Mono<ProductoModel> getProductoById(@PathVariable Long id) {
         return productoService.getProductoById(id);
     }
 
-    // Crear un nuevo producto
+    @Operation(summary = "Crear un nuevo producto")
     @PostMapping
     public Mono<ProductoModel> createProducto(@RequestBody ProductoModel producto) {
         return productoService.createProducto(producto);
     }
 
-    // Actualizar un producto existente
+    @Operation(summary = "Actualizar un producto existente")
     @PutMapping("/{id}")
     public Mono<ProductoModel> updateProducto(@PathVariable Long id, @RequestBody ProductoModel producto) {
         return productoService.updateProducto(id, producto);
     }
 
-    // Eliminar un producto de forma lógica
-    @DeleteMapping("/{id}")
+
+    // Agregado: Eliminar lógicamente un producto
+    @Operation(summary = "Eliminar lógicamente un producto")
+    @DeleteMapping("/logic/{id}")
     public Mono<ProductoModel> deleteLogicProducto(@PathVariable Long id) {
         return productoService.deleteLogicProducto(id);
     }
