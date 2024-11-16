@@ -46,4 +46,14 @@ public class ProductoController {
     public Mono<ProductoModel> deleteLogicProducto(@PathVariable Long id) {
         return productoService.deleteLogicProducto(id);
     }
+
+
+    // Restaurar un producto (cambiar su estado a "activo")
+    @Operation(summary = "Restaurar un producto")
+    @PutMapping("/restaurar/{id}")
+    public Mono<ProductoModel> restoreProducto(@PathVariable Long id) {
+        return productoService.restoreProducto(id);
+    }
+
+
 }

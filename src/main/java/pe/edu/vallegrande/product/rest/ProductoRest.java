@@ -2,6 +2,8 @@ package pe.edu.vallegrande.product.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import io.swagger.v3.oas.annotations.Operation;
 import pe.edu.vallegrande.product.model.ProductoModel;
 import pe.edu.vallegrande.product.service.ProductoService;
 import reactor.core.publisher.Mono;
@@ -42,5 +44,12 @@ public class ProductoRest {
     @DeleteMapping("/{id}")
     public Mono<ProductoModel> deleteLogicProducto(@PathVariable Long id) {
         return productoService.deleteLogicProducto(id);
+    }
+
+    // Restaurar un producto (cambiar su estado a "activo")
+    @Operation(summary = "Restaurar un producto")
+    @PutMapping("/restaurar/{id}")
+    public Mono<ProductoModel> restoreProducto(@PathVariable Long id) {
+        return productoService.restoreProducto(id);
     }
 }

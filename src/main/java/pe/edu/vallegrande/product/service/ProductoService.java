@@ -82,4 +82,25 @@ public class ProductoService {
                 })
                 .switchIfEmpty(Mono.error(new Exception("Producto no encontrado"))); // Si no se encuentra el producto
     }
+
+
+    /**
+     * Restaurar un producto (cambiar su estado a "activo").
+     * 
+     * @param id ID del producto a restaurar
+     * @return Mono<ProductoModel> producto restaurado
+     */
+    public Mono<ProductoModel> restoreProducto(Long id) {
+        return productoRepository.findById(id)
+                .flatMap(producto -> {
+                    // Verificar si el producto está inactivo
+                    if ("inactivo".equalsIgnoreCase(producto.getEstado())) {
+                        producto.setEstado("activo"); // Cambiar el estado a "activo"
+                        return productoRepository.save(producto); // Guardar el producto restaurado
+                    } else {
+                        return Mono.error(new Exception("El producto no está inactivo, no se puede restaurar"));
+                    }
+                })
+                .switchIfEmpty(Mono.error(new Exception("Producto no encontrado"))); // Si no se encuentra el producto
+    }
 }
