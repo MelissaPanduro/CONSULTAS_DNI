@@ -1,4 +1,4 @@
-package pe.edu.vallegrande.product;
+package pe.edu.vallegrande.dni;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

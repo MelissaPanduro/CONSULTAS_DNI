@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: melissapanduro/consultas_dni
+  r2dbc:
+    url: postgresql://neondb_owner:65BKltSdzWyQ@ep-patient-dew-a5kv2h9q.us-east-2.aws.neon.tech/neondb?sslmode=require
+    username: neondb_owner
+    password: 65BKltSdzWyQ
+  show-sql: true
+
+# Configuración del servicio cognitivo
+api:
+  dniruc:
+    url: https://dniruc.apisperu.com/api/v1/dni/76543209?token=
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imp1bGlvLnF1aXNwZUB2YWxsZWdyYW5kZS5lZHUucGUifQ.6M-P2QMMvKFZEeMvTUXvkOooM02N_pWqt0OdlaYW3PM
+    host: dniruc.apisperu.com

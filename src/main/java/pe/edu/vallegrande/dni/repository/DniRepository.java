@@ -1,15 +1,15 @@
-package pe.edu.vallegrande.product.repository;
+package pe.edu.vallegrande.dni.repository;
 
 import java.math.BigDecimal;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
-import pe.edu.vallegrande.product.model.ProductoModel;
+import pe.edu.vallegrande.dni.model.DniModel;
 import reactor.core.publisher.Flux;
 import org.springframework.data.r2dbc.repository.Query;
 
 @Repository
-public interface ProductoRepository extends ReactiveCrudRepository<ProductoModel, Long> {
+public interface ProductoRepository extends ReactiveCrudRepository<DniModel, Long> {
 
     /**
      * Buscar productos por descripción (case-sensitive).

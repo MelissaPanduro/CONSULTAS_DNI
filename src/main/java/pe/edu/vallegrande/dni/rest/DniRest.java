@@ -1,43 +1,43 @@
-package pe.edu.vallegrande.product.rest;
+package pe.edu.vallegrande.dni.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
-import pe.edu.vallegrande.product.model.ProductoModel;
-import pe.edu.vallegrande.product.service.ProductoService;
+import pe.edu.vallegrande.dni.model.ProductoModel;
+import pe.edu.vallegrande.dni.service.ProductoService;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/dni")
 @RequiredArgsConstructor
 public class ProductoRest {
 
-    private final ProductoService productoService;
+    private final DniService dniService;
 
     // Obtener todos los productos
     @GetMapping
-    public Flux<ProductoModel> getAllProductos() {
-        return productoService.getAllProductos();
+    public Flux<DniModel> getAllDni() {
+        return dniService.getAllDni();
     }
 
     // Obtener producto por ID
     @GetMapping("/{id}")
-    public Mono<ProductoModel> getProductoById(@PathVariable Long id) {
-        return productoService.getProductoById(id);
+    public Mono<DniModel> getDniById(@PathVariable Long id) {
+        return dniService.getDniById(id);
     }
 
     // Crear un nuevo producto
     @PostMapping
-    public Mono<ProductoModel> createProducto(@RequestBody ProductoModel producto) {
-        return productoService.createProducto(producto);
+    public Mono<DniModel> createDni(@RequestBody DniModel dni) {
+        return dniService.createDni(dni);
     }
 
     // Actualizar un producto existente
     @PutMapping("/{id}")
-    public Mono<ProductoModel> updateProducto(@PathVariable Long id, @RequestBody ProductoModel producto) {
-        return productoService.updateProducto(id, producto);
+    public Mono<DniModel> updateDni(@PathVariable Long id, @RequestBody ProductoModel producto) {
+        return dniService.updateDni(id, producto);
     }
 
     // Eliminar un producto de forma lógica

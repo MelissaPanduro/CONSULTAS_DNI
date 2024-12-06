@@ -1,27 +1,27 @@
-package pe.edu.vallegrande.product.service;
+package pe.edu.vallegrande.dni.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.vallegrande.product.model.ProductoModel;
-import pe.edu.vallegrande.product.repository.ProductoRepository;
+import pe.edu.vallegrande.dni.model.ProductoModel;
+import pe.edu.vallegrande.dni.repository.ProductoRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ProductoService {
+public class DniService {
 
-    private final ProductoRepository productoRepository;
+    private final DniRepository dniRepository;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
+    public DniService(DniRepository dniRepository) {
+        this.dniRepository = dniRepository;
     }
 
     /**
      * Obtener todos los productos activos
      * @return Flux<ProductoModel> lista de productos activos
      */
-    public Flux<ProductoModel> getAllProductos() {
+    public Flux<DniModel> getAllDni() {
         return productoRepository.findByEstado("activo"); // Solo productos con estado "activo"
     }
 
@@ -55,16 +55,13 @@ public class ProductoService {
                 .switchIfEmpty(Mono.error(new RuntimeException("Producto no encontrado con ID: " + id)))
                 .flatMap(existingProducto -> {
                     // Actualiza los campos del producto existente
-                    existingProducto.setTipo(producto.getTipo());
-                    existingProducto.setDescripcion(producto.getDescripcion());
-                    existingProducto.setPesoPaquete(producto.getPesoPaquete());
-                    existingProducto.setCantidadPaquete(producto.getCantidadPaquete());
-                    existingProducto.setPrecioKilo(producto.getPrecioKilo());
-                    existingProducto.setStock(producto.getStock());
-                    existingProducto.setFechaIngreso(producto.getFechaIngreso());
-                    existingProducto.setFechaVencimiento(producto.getFechaVencimiento());
-                    existingProducto.setEstado(producto.getEstado());
-                    return productoRepository.save(existingProducto);
+                    existingDni.setSuccess(dni.getSuccess());
+                    existingDni.setDni(dni.getDni());
+                    existingDni.setNombres(dni.getNombres());
+                    existingDni.setApellidoPaterno(dni.getApellidoPaterno());
+                    existingDni.setApellidoMaterno(dni.getApellidoMaterno());
+                    existingDni.setCodVerifica(dni.getCodVerifica());
+                    return productoRepository.save(existingdni);
                 });
     }
 
